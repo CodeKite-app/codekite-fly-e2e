@@ -7,5 +7,5 @@ export async function formatReceipt(response) {
   const name = customer.given_name != null && customer.family_name != null
     ? `${customer.given_name} ${customer.family_name}`
     : customer.full_name;
-  return `Receipt for ${name}: ${response.currency} ${amount}`;
+  return `Receipt for ${name}: ${response.currency_code ?? response.currency} ${amount}`;
 }
