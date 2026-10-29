@@ -4,5 +4,8 @@ import { readCustomer } from '@codekite/test-provider';
 export async function formatReceipt(response) {
   const customer = readCustomer(response);
   const amount = (response.amount_minor / 100).toFixed(2);
-  return `Receipt for ${customer.full_name}: ${response.currency} ${amount}`;
+  const name = customer.given_name != null && customer.family_name != null
+    ? `${customer.given_name} ${customer.family_name}`
+    : customer.full_name;
+  return `Receipt for ${name}: ${response.currency} ${amount}`;
 }
